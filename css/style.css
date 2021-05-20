@@ -1,0 +1,36 @@
+.cabecalho__menu__link, .cabecalho__logo {
+  text-decoration: none;
+}
+
+/* place holder selector */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  height: 70px;
+  align-items: center;
+  background: #e7e7e7;
+}
+.cabecalho__logo {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  font-size: 1.5625rem;
+}
+.cabecalho__btn {
+  display: none;
+}
+@media (max-width: 767.98px) {
+  .cabecalho__btn {
+    display: flex;
+  }
+}
+.cabecalho__menu {
+  display: flex;
+  gap: 1rem;
+}
+.cabecalho__menu__link:hover {
+  color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

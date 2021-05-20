@@ -1,0 +1,59 @@
+%no-decoration { text-decoration: none;} /* place holder selector */
+
+@mixin for-phone-only {
+    @media (max-width: 767.98px) {@content}
+}
+
+@mixin for-tablet-only {
+    @media (min-width: 768px) and (max-width:1199.98px) {@content;}
+}
+
+@mixin for-desktop-only {
+    @media (min-width: 1200px) {@content}
+}
+
+@function calculateRem($size){
+    @return $size / 16px * 1rem;
+
+}
+@mixin fontSize($size) {  
+    font-size: $size;
+    font-size: calculateRem($size) ;
+    
+}
+.cabecalho{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    height: 70px;
+    align-items: center;
+    background: #e7e7e7;
+
+    &__logo {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: 500;
+        @extend %no-decoration;
+        @include fontSize(25px);
+    }
+    &__btn {
+        display: none;
+
+        @include for-phone-only() {
+            display: flex;
+        }
+
+        
+    }
+    &__menu {
+        display: flex;
+        gap: 1rem;
+
+        &__link {
+            @extend %no-decoration;
+            &:hover {
+                color:red;
+            }
+        }
+        
+    }
+}

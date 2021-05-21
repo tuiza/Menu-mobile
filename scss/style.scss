@@ -9,7 +9,7 @@
 }
 
 @mixin for-desktop-only {
-    @media (min-width: 1200px) {@content}
+    @media (min-width: 1200px) {@content;}
 }
 
 .nav {
@@ -22,8 +22,22 @@
 
     @include for-phone-only() {
         &.active &__menu {  /* se a classe active tiver on faz isso no menu */
-            display: block;
+            height: calc(100vh - 70px);
+            visibility: visible;
+            overflow-y: auto; /* pra qnd passar do tam da tela, ter o scroll */
+            }
+        &.active &__btn__hamburger {
+            border-top-color:transparent;
+
+            &::before {
+                transform: rotate(135deg);
+            }
+            &::after {
+                transform: rotate(-135deg);
+                top: -7px;
+            }
         }
+        
     }
     &__logo {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -35,12 +49,53 @@
         display: none;
 
         @include for-phone-only() {
-            display: block;
+            display: flex; /* pras barrinhas ficarem do lado do btn */
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border:none;
+            background: none;
+            cursor: pointer;
+            gap: .5rem;
+            align-items: center;
+            
+            &__hamburger {
+                border-top: 2px solid ;
+                width: 20px;
+                /* fica distante .5rem do btn */
+
+                &::before, &::after {
+                    content:'';
+                    display: block; /* pra ficar uma barrinha em cada linha */
+                    width: 20px;
+                    height: 2px;
+                    background: currentColor;
+                    margin-top: 5px;
+                    transition: .3s;
+                    position: relative;
+                    
+                }   
+            }
+            }
         }
 
-    }
+    
     &__menu {
-        display: block;
+        display: flex;
+
+        @include for-phone-only() {
+            display: block;
+            position: absolute;
+            width:100%;
+            top:70px;  /*pra ficar embaixo*/
+            right: 0px;
+            background: #e7e7e7;
+            height: 0;
+            z-index: 1000;
+            transition: .6s;
+            visibility: hidden;
+            overflow-y: hidden;
+        }
+
         &__links {
             padding: .5rem;
             &:hover {
@@ -56,17 +111,6 @@
 
         &__link {
             @extend %no-decoration;
-        }
-
-        @include for-phone-only() {
-            display: none;
-            position: absolute;
-            width:100%;
-            top:70px;  /*pra ficar embaixo*/
-            right: 0px;
-            background: #e7e7e7;
-            height: calc(100vh - 70px);
-            z-index: 1000;
         }
         
     }
